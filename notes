@@ -1,0 +1,37 @@
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  Starting Nebari Local Deployment
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+[INFO]  Project: nebari-test
+[INFO]  Namespace: dev
+[INFO]  Nebari Version: 2025.10.1
+[INFO]  Plan Only: false
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  Checking Prerequisites
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+[OK]    terraform found: 1.14.4
+[OK]    docker found: 29.2.1
+[OK]    kind found: kind v0.31.0 go1.25.5 linux/amd64
+[ERROR] kubectl is NOT installed
+[OK]    jq found: jq-1.8.1
+[WARN]  helm not found (optional, but recommended)
+[OK]    Docker daemon is running
+[ERROR] Missing prerequisites: kubectl
+[INFO]  Install missing tools before continuing.
+
+-------------------
+# NOTE:
+update this in stage 2 main.terraform
+terraform {
+  required_providers {
+    docker = {
+      source  = "kreuzwerker/docker"
+      version = "~> 3.0.2" 
+    }
+  }
+}
+
+-------------------

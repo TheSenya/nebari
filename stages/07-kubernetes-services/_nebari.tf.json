@@ -1,0 +1,14 @@
+{
+    "terraform": {
+        "backend": {
+            "kubernetes": {
+                "secret_suffix": "nebari-test-dev-07-kubernetes-services",
+                "load_config_file": true
+            }
+        }
+    },
+    "provider": {
+        "kubernetes": {},
+        "helm": {}
+    }
+}

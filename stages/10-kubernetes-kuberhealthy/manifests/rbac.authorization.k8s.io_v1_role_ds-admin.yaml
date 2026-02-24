@@ -1,0 +1,22 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: ds-admin
+  namespace: dev
+rules:
+- apiGroups:
+  - ""
+  - extensions
+  - apps
+  resources:
+  - daemonsets
+  - pods
+  verbs:
+  - create
+  - delete
+  - deletecollection
+  - get
+  - list
+  - patch
+  - update
+  - watch

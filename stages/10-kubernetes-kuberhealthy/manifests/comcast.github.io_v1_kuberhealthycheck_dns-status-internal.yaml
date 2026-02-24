@@ -1,0 +1,32 @@
+apiVersion: comcast.github.io/v1
+kind: KuberhealthyCheck
+metadata:
+  name: dns-status-internal
+  namespace: dev
+spec:
+  podSpec:
+    containers:
+    - env:
+      - name: NODE_NAME
+        valueFrom:
+          fieldRef:
+            fieldPath: spec.nodeName
+      - name: HOSTNAME
+        value: kubernetes.default
+      image: docker.io/kuberhealthy/dns-resolution-check:v1.5.0
+      imagePullPolicy: IfNotPresent
+      name: main
+      resources:
+        requests:
+          cpu: 10m
+          memory: 50Mi
+      securityContext:
+        allowPrivilegeEscalation: false
+        readOnlyRootFilesystem: true
+        runAsNonRoot: true
+    securityContext:
+      fsGroup: 999
+      runAsUser: 999
+    serviceAccountName: dns-internal-sa
+  runInterval: 2m
+  timeout: 15m

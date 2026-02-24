@@ -1,0 +1,33 @@
+provider: local
+namespace: dev
+nebari_version: 2025.10.1
+project_name: nebari-test
+ci_cd:
+  type: none
+terraform_state:
+  type: remote
+security:
+  keycloak:
+    initial_root_password: 8jqhgj12n6o5d8l6drzwrjstm0b6sx5g
+  authentication:
+    type: password
+theme:
+  jupyterhub:
+    hub_title: Nebari - nebari-test
+    welcome: Welcome! Learn about Nebari's features and configurations in <a href="https://www.nebari.dev/docs/welcome">the
+      documentation</a>. If you have any questions or feedback, reach the team on
+      <a href="https://www.nebari.dev/docs/community#getting-support">Nebari's support
+      forums</a>.
+    hub_subtitle: Your open source data science platform, hosted
+local:
+  kube_context:
+  node_selectors:
+    general:
+      key: kubernetes.io/os
+      value: linux
+    user:
+      key: kubernetes.io/os
+      value: linux
+    worker:
+      key: kubernetes.io/os
+      value: linux

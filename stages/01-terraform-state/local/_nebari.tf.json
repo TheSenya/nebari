@@ -1,0 +1,303 @@
+{
+    "resource": {
+        "terraform_data": {
+            "nebari_config": {
+                "input": {
+                    "project_name": "nebari-test",
+                    "namespace": "dev",
+                    "provider": "local",
+                    "nebari_version": "2025.10.1",
+                    "prevent_deploy": false,
+                    "ci_cd": {
+                        "type": "none",
+                        "branch": "main",
+                        "commit_render": true,
+                        "before_script": [],
+                        "after_script": []
+                    },
+                    "terraform_state": {
+                        "type": "remote",
+                        "backend": null,
+                        "config": {}
+                    },
+                    "local": {
+                        "kube_context": null,
+                        "node_selectors": {
+                            "general": {
+                                "key": "kubernetes.io/os",
+                                "value": "linux"
+                            },
+                            "user": {
+                                "key": "kubernetes.io/os",
+                                "value": "linux"
+                            },
+                            "worker": {
+                                "key": "kubernetes.io/os",
+                                "value": "linux"
+                            }
+                        }
+                    },
+                    "existing": null,
+                    "google_cloud_platform": null,
+                    "amazon_web_services": null,
+                    "azure": null,
+                    "external_container_reg": {
+                        "enabled": false,
+                        "access_key_id": null,
+                        "secret_access_key": null,
+                        "extcr_account": null,
+                        "extcr_region": null
+                    },
+                    "domain": null,
+                    "certificate": {
+                        "type": "self-signed",
+                        "secret_name": null,
+                        "acme_email": null,
+                        "acme_server": "https://acme-v02.api.letsencrypt.org/directory",
+                        "acme_challenge_type": "tls"
+                    },
+                    "ingress": {
+                        "terraform_overrides": {}
+                    },
+                    "dns": {
+                        "provider": null,
+                        "auto_provision": false
+                    },
+                    "security": {
+                        "authentication": {
+                            "type": "password"
+                        },
+                        "shared_users_group": true,
+                        "keycloak": {
+                            "initial_root_password": "8jqhgj12n6o5d8l6drzwrjstm0b6sx5g",
+                            "overrides": {},
+                            "realm_display_name": "Nebari",
+                            "themes": {
+                                "enabled": false,
+                                "repository": "",
+                                "branch": "main"
+                            }
+                        }
+                    },
+                    "default_images": {
+                        "jupyterhub": "quay.io/nebari/nebari-jupyterhub:2025.10.1",
+                        "jupyterlab": "quay.io/nebari/nebari-jupyterlab:2025.10.1",
+                        "dask_worker": "quay.io/nebari/nebari-dask-worker:2025.10.1"
+                    },
+                    "storage": {
+                        "type": "nfs",
+                        "conda_store": "200Gi",
+                        "shared_filesystem": "200Gi"
+                    },
+                    "theme": {
+                        "jupyterhub": {
+                            "hub_title": "Nebari - nebari-test",
+                            "hub_subtitle": "Your open source data science platform, hosted",
+                            "welcome": "Welcome! Learn about Nebari's features and configurations in <a href=\"https://www.nebari.dev/docs/welcome\">the documentation</a>. If you have any questions or feedback, reach the team on <a href=\"https://www.nebari.dev/docs/community#getting-support\">Nebari's support forums</a>.",
+                            "logo": "https://raw.githubusercontent.com/nebari-dev/nebari-design/main/logo-mark/horizontal/Nebari-Logo-Horizontal-Lockup-White-text.svg",
+                            "favicon": "https://raw.githubusercontent.com/nebari-dev/nebari-design/main/symbol/favicon.ico",
+                            "primary_color": "#4f4173",
+                            "primary_color_dark": "#4f4173",
+                            "secondary_color": "#957da6",
+                            "secondary_color_dark": "#957da6",
+                            "accent_color": "#32C574",
+                            "accent_color_dark": "#32C574",
+                            "text_color": "#111111",
+                            "h1_color": "#652e8e",
+                            "h2_color": "#652e8e",
+                            "version": "v2025.10.1",
+                            "navbar_color": "#1c1d26",
+                            "navbar_text_color": "#f1f1f6",
+                            "navbar_hover_color": "#db96f3",
+                            "display_version": "True"
+                        }
+                    },
+                    "profiles": {
+                        "jupyterlab": [
+                            {
+                                "access": "all",
+                                "display_name": "Small Instance",
+                                "description": "Stable environment with 2 cpu / 8 GB ram",
+                                "default": true,
+                                "users": null,
+                                "groups": null,
+                                "kubespawner_override": {
+                                    "cpu_limit": 2.0,
+                                    "cpu_guarantee": 1.5,
+                                    "mem_limit": "8G",
+                                    "mem_guarantee": "5G"
+                                },
+                                "profile_options": {}
+                            },
+                            {
+                                "access": "all",
+                                "display_name": "Medium Instance",
+                                "description": "Stable environment with 4 cpu / 16 GB ram",
+                                "default": false,
+                                "users": null,
+                                "groups": null,
+                                "kubespawner_override": {
+                                    "cpu_limit": 4.0,
+                                    "cpu_guarantee": 3.0,
+                                    "mem_limit": "16G",
+                                    "mem_guarantee": "10G"
+                                },
+                                "profile_options": {}
+                            }
+                        ],
+                        "dask_worker": {
+                            "Small Worker": {
+                                "worker_cores_limit": 2.0,
+                                "worker_cores": 1.5,
+                                "worker_memory_limit": "8G",
+                                "worker_memory": "5G",
+                                "worker_threads": 2
+                            },
+                            "Medium Worker": {
+                                "worker_cores_limit": 4.0,
+                                "worker_cores": 3.0,
+                                "worker_memory_limit": "16G",
+                                "worker_memory": "10G",
+                                "worker_threads": 4
+                            }
+                        }
+                    },
+                    "environments": {
+                        "environment-dask.yaml": {
+                            "name": "dask",
+                            "channels": [
+                                "conda-forge"
+                            ],
+                            "dependencies": [
+                                "python==3.11.6",
+                                "ipykernel==6.26.0",
+                                "ipywidgets==8.1.1",
+                                "nebari-dask==2025.10.1",
+                                "python-graphviz==0.20.1",
+                                "pyarrow==14.0.1",
+                                "s3fs==2023.10.0",
+                                "gcsfs==2023.10.0",
+                                "numpy=1.26.0",
+                                "numba=0.58.1",
+                                "pandas=2.1.3",
+                                "xarray==2023.10.1"
+                            ]
+                        },
+                        "environment-dashboard.yaml": {
+                            "name": "dashboard",
+                            "channels": [
+                                "conda-forge"
+                            ],
+                            "dependencies": [
+                                "python==3.11.6",
+                                "cufflinks-py==0.17.3",
+                                "dash==2.14.1",
+                                "geopandas==0.14.1",
+                                "geopy==2.4.0",
+                                "geoviews==1.11.0",
+                                "gunicorn==21.2.0",
+                                "holoviews==1.18.1",
+                                "ipykernel==6.26.0",
+                                "ipywidgets==8.1.1",
+                                "jupyter==1.0.0",
+                                "jupyter_bokeh==3.0.7",
+                                "matplotlib==3.8.1",
+                                "nebari-dask==2025.10.1",
+                                "nodejs=20.8.1",
+                                "numpy==1.26.0",
+                                "openpyxl==3.1.2",
+                                "pandas==2.1.3",
+                                "panel==1.3.1",
+                                "param==2.0.1",
+                                "plotly==5.18.0",
+                                "python-graphviz==0.20.1",
+                                "rich==13.6.0",
+                                "streamlit==1.28.1",
+                                "sympy==1.12",
+                                "voila==0.5.5",
+                                "xarray==2023.10.1",
+                                "pip==23.3.1",
+                                {
+                                    "pip": [
+                                        "streamlit-image-comparison==0.0.4",
+                                        "noaa-coops==0.1.9",
+                                        "dash_core_components==2.0.0",
+                                        "dash_html_components==2.0.0"
+                                    ]
+                                }
+                            ]
+                        }
+                    },
+                    "conda_store": {
+                        "extra_settings": {},
+                        "extra_config": "",
+                        "image": "quansight/conda-store-server",
+                        "image_tag": "2025.2.2",
+                        "default_namespace": "nebari-git",
+                        "object_storage": "200Gi",
+                        "worker": null
+                    },
+                    "argo_workflows": {
+                        "enabled": true,
+                        "overrides": {},
+                        "nebari_workflow_controller": {
+                            "enabled": true,
+                            "image_tag": "2025.10.1"
+                        }
+                    },
+                    "monitoring": {
+                        "enabled": true,
+                        "overrides": {
+                            "loki": {},
+                            "promtail": {},
+                            "minio": {}
+                        },
+                        "minio_enabled": true,
+                        "healthchecks": {
+                            "enabled": false,
+                            "kuberhealthy_helm_version": "100"
+                        }
+                    },
+                    "telemetry": {
+                        "jupyterlab_pioneer": {
+                            "enabled": false,
+                            "log_format": null
+                        }
+                    },
+                    "jupyterhub": {
+                        "overrides": {}
+                    },
+                    "jupyterlab": {
+                        "default_settings": {},
+                        "gallery_settings": {
+                            "title": "Examples",
+                            "destination": "examples",
+                            "exhibits": [],
+                            "hide_gallery_without_exhibits": true
+                        },
+                        "idle_culler": {
+                            "terminal_cull_inactive_timeout": 15,
+                            "terminal_cull_interval": 5,
+                            "kernel_cull_idle_timeout": 15,
+                            "kernel_cull_interval": 5,
+                            "kernel_cull_connected": true,
+                            "kernel_cull_busy": false,
+                            "server_shutdown_no_activity_timeout": 15
+                        },
+                        "initial_repositories": [],
+                        "preferred_dir": null
+                    },
+                    "jhub_apps": {
+                        "enabled": false,
+                        "overrides": {}
+                    },
+                    "ceph": {
+                        "storage_class_name": null
+                    },
+                    "helm_extensions": [],
+                    "tf_extensions": []
+                }
+            }
+        }
+    }
+}

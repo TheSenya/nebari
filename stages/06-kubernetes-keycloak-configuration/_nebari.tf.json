@@ -1,0 +1,10 @@
+{
+    "terraform": {
+        "backend": {
+            "kubernetes": {
+                "secret_suffix": "nebari-test-dev-06-kubernetes-keycloak-configuration",
+                "load_config_file": true
+            }
+        }
+    }
+}

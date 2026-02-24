@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: kuberhealthy
+  name: kuberhealthy
+  namespace: dev
+spec:
+  ports:
+  - name: http
+    port: 80
+    targetPort: http
+  selector:
+    app: kuberhealthy
+  type: ClusterIP

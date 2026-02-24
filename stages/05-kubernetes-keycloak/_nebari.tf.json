@@ -1,0 +1,14 @@
+{
+    "terraform": {
+        "backend": {
+            "kubernetes": {
+                "secret_suffix": "nebari-test-dev-05-kubernetes-keycloak",
+                "load_config_file": true
+            }
+        }
+    },
+    "provider": {
+        "kubernetes": {},
+        "helm": {}
+    }
+}

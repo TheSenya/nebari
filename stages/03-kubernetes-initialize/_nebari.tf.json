@@ -1,11 +1,11 @@
 {
   "provider": {
     "kubernetes": {
-      "config_path": "/home/sendev/Code/nebari/terraform-state/kubeconfig"
+      "config_path": "/Users/user0/code/nebari-gh/terraform-state/kubeconfig"
     },
     "helm": {
       "kubernetes": {
-        "config_path": "/home/sendev/Code/nebari/terraform-state/kubeconfig"
+        "config_path": "/Users/user0/code/nebari-gh/terraform-state/kubeconfig"
       }
     }
   }

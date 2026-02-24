@@ -112,7 +112,7 @@ resource "kubernetes_cluster_role_binding" "main" {
 
 
 resource "kubernetes_service" "main" {
-  wait_for_load_balancer = true
+  wait_for_load_balancer = false
 
   metadata {
     name        = "${var.name}-traefik-ingress"
@@ -173,7 +173,7 @@ resource "kubernetes_service" "main" {
 }
 
 resource "kubernetes_service" "traefik_internal" {
-  wait_for_load_balancer = true
+  wait_for_load_balancer = false
 
   metadata {
     name      = "${var.name}-traefik-internal"

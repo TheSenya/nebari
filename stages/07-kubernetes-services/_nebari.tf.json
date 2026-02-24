@@ -1,14 +1,12 @@
 {
-    "terraform": {
-        "backend": {
-            "kubernetes": {
-                "secret_suffix": "nebari-test-dev-07-kubernetes-services",
-                "load_config_file": true
-            }
-        }
+  "provider": {
+    "kubernetes": {
+      "config_path": "/Users/user0/code/nebari-gh/terraform-state/kubeconfig"
     },
-    "provider": {
-        "kubernetes": {},
-        "helm": {}
+    "helm": {
+      "kubernetes": {
+        "config_path": "/Users/user0/code/nebari-gh/terraform-state/kubeconfig"
+      }
     }
+  }
 }

@@ -90,9 +90,15 @@ resource "kubectl_manifest" "load-balancer" {
 # kreuzwerker/docker provider (which has API 1.41 hardcoded and fails on Docker 29.x+).
 data "external" "docker_network" {
   program = ["bash", "-c", <<-EOF
-    SUBNET=$(docker network inspect kind -f '{{(index .IPAM.Config 0).Subnet}}' 2>/dev/null)
+    # Find the IPv4 subnet from the kind Docker network.
+    # IPAM.Config may contain both IPv6 and IPv4 entries; we need the IPv4 one.
+    SUBNET=$(docker network inspect kind \
+      -f '{{range .IPAM.Config}}{{.Subnet}} {{end}}' 2>/dev/null \
+      | tr ' ' '\n' \
+      | grep '\.' \
+      | head -1)
     if [ -z "$SUBNET" ]; then
-      echo '{"subnet": "172.18.0.0/16"}' 
+      echo '{"subnet": "172.18.0.0/16"}'
     else
       echo "{\"subnet\": \"$SUBNET\"}"
     fi

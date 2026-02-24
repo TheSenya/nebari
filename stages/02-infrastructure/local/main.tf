@@ -4,10 +4,6 @@ terraform {
       source  = "registry.terraform.io/tehcyx/kind"
       version = "0.4.0"
     }
-    docker = {
-      source  = "kreuzwerker/docker"
-      version = "3.0.2"
-    }
     kubectl = {
       source  = "gavinbunney/kubectl"
       version = ">= 1.7.0"
@@ -16,10 +12,6 @@ terraform {
 }
 
 provider "kind" {
-
-}
-
-provider "docker" {
 
 }
 
@@ -94,18 +86,24 @@ resource "kubectl_manifest" "load-balancer" {
   depends_on = [kubectl_manifest.metallb]
 }
 
-data "docker_network" "kind" {
-  name = "kind"
+# Use the docker CLI (which negotiates API versions correctly) instead of the
+# kreuzwerker/docker provider (which has API 1.41 hardcoded and fails on Docker 29.x+).
+data "external" "docker_network" {
+  program = ["bash", "-c", <<-EOF
+    SUBNET=$(docker network inspect kind -f '{{(index .IPAM.Config 0).Subnet}}' 2>/dev/null)
+    if [ -z "$SUBNET" ]; then
+      echo '{"subnet": "172.18.0.0/16"}' 
+    else
+      echo "{\"subnet\": \"$SUBNET\"}"
+    fi
+  EOF
+  ]
 
   depends_on = [kind_cluster.default]
 }
 
 locals {
-  metallb_ip_min = cidrhost([
-    for network in data.docker_network.kind.ipam_config : network if network.gateway != ""
-  ][0].subnet, 356)
-
-  metallb_ip_max = cidrhost([
-    for network in data.docker_network.kind.ipam_config : network if network.gateway != ""
-  ][0].subnet, 406)
+  metallb_ip_min = cidrhost(data.external.docker_network.result.subnet, 356)
+  metallb_ip_max = cidrhost(data.external.docker_network.result.subnet, 406)
 }
+
